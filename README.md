@@ -20,37 +20,9 @@ Dalam membangun aplikasi ini, saya memanfaatkan beberapa komponen Flutter untuk 
 * **`AlertDialog`**: Memberikan konfirmasi kepada pengguna sebelum melakukan aksi sensitif seperti menghapus data.
 * **`Navigator`**: Menangani perpindahan antar halaman (Routing) antar layar aplikasi.
 
----
-
-## Tampilan Aplikasi
-
-![Tampilan Detail](path/ke/gambar/detail_screen.png)
 
 ## Cara Menjalankan
 1. Clone repository ini.
 2. Jalankan `flutter pub get` untuk menginstall dependencies.
 3. Konfigurasi `SupabaseService` dengan URL dan Key dari proyek Supabase kamu.
 4. Jalankan `flutter run`.
-
----
-*Proyek ini dikembangkan sebagai tugas [Nama Mata Kuliah/Tugas].*
-![Tampilan Detail](path/ke/gambar/detail_screen.png)
-
-## Cara Menjalankan
-1. Clone repository ini.
-2. Jalankan `flutter pub get` untuk menginstall dependencies.
-3. Konfigurasi `SupabaseService` dengan URL dan Key dari proyek Supabase kamu.
-4. Jalankan `flutter run`.
-
----
-*Proyek ini dikembangkan sebagai tugas [Nama Mata Kuliah/Tugas].*
-![Tampilan Detail](path/ke/gambar/detail_screen.png)
-
-## Cara Menjalankan
-1. Clone repository ini.
-2. Jalankan `flutter pub get` untuk menginstall dependencies.
-3. Konfigurasi `SupabaseService` dengan URL dan Key dari proyek Supabase kamu.
-4. Jalankan `flutter run`.
-
----
-*Proyek ini dikembangkan sebagai tugas [Nama Mata Kuliah/Tugas].*
