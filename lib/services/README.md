@@ -1,5 +1,5 @@
 # ShoesVault - Aplikasi Manajemen Koleksi Sepatu
-![alt text](<Screenshot 2026-03-14 093800.png>)
+![alt text](<Screenshot%202026-03-14%20093800.png>)
 ## Deskripsi Aplikasi
 ShoesVault adalah aplikasi mobile berbasis Flutter yang dikembangkan untuk membantu kolektor sepatu mengelola inventaris koleksi mereka secara digital. Aplikasi ini terintegrasi dengan Supabase sebagai *Backend-as-a-Service* (BaaS) untuk menyimpan data sepatu di Cloud secara aman dan real-time.
 
@@ -28,21 +28,21 @@ Dalam membangun aplikasi ini, saya memanfaatkan beberapa komponen Flutter untuk 
 
 ## Demonstrasi
 1. Menambah koleksi sepatu 
-![alt text](<fitur tambah.png>)
+![alt text](<fitur%20tambah.png>)
 Melakukan input data koleksi sepatu.
 
 2. Hasil tambah koleksi
-![alt text](<hasil tambah koleksi.png>)
+![alt text](<hasil%20tambah%20koleksi.png>)
 Disini sudah ditambahkan data koleksi yang sebelumnya ditambahkan.
 
 3. Detail koleksi
-![alt text](<detail koleksi.png>)
+![alt text](<detail&20koleksi.png>)
 Disini juga dapat melihat detail koleksi tertentu.
 
 4. Edit koleksi
-![alt text](<edit koleksi.png>)
+![alt text](<edit%20koleksi.png>)
 Koleksi sepatu juga dapat dihapus, pada bagan data ukuran sepatu tidak dapat menginput angka, hanya huruf yang akan terbaca oleh sistem.
 
 5. Pencarian koleksi
-![alt text](<fitur pencarian.png>)
+![alt text](<fitur%20pencarian.png>)
 Dapat jga melakukan pencarian koleksi agar mudah mencari koleksi.
