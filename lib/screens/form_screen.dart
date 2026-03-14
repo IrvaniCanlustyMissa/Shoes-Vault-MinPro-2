@@ -1,84 +1,105 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../services/supabase_service.dart';
 
 class FormScreen extends StatefulWidget {
-  final Map<String, dynamic>? Shoes;
+  final Map<String, dynamic>? shoe;
 
-  FormScreen({this.Shoes});
+  const FormScreen({Key? key, this.shoe}) : super(key: key);
 
   @override
-  _FormScreenState createState() => _FormScreenState();
+  State<FormScreen> createState() => _FormScreenState();
 }
 
 class _FormScreenState extends State<FormScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _service = SupabaseService();
-
+  final SupabaseService _service = SupabaseService();
   final _namaController = TextEditingController();
   final _brandController = TextEditingController();
   final _ukuranController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    if (widget.Shoes != null) {
-      _namaController.text = widget.Shoes!['Nama_Sepatu'] ?? '';
-      _brandController.text = widget.Shoes!['Brand'] ?? '';
-      _ukuranController.text = (widget.Shoes!['Ukuran'] ?? '').toString();
+    if (widget.shoe != null) {
+      _namaController.text = widget.shoe!['Nama_Sepatu']?.toString() ?? '';
+      _brandController.text = widget.shoe!['Brand']?.toString() ?? '';
+      _ukuranController.text = widget.shoe!['Ukuran']?.toString() ?? '';
+    }
+  }
+
+  Future<void> _saveData() async {
+    if (_namaController.text.isEmpty || _ukuranController.text.isEmpty) {
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      final String nama = _namaController.text;
+      final String brand = _brandController.text;
+      final int ukuran = int.parse(_ukuranController.text);
+
+      if (widget.shoe == null) {
+        await _service.addShoe(nama, brand, ukuran);
+      } else {
+        await _service.updateShoe(widget.shoe!['id'], nama, brand, ukuran);
+      }
+
+      if (mounted) Navigator.pop(context);
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Error: $e")));
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.Shoes == null ? "Tambah Sepatu" : "Edit Sepatu")),
+      appBar: AppBar(
+        title: Text(widget.shoe == null ? "Tambah Sepatu" : "Edit Sepatu"),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _namaController,
-                decoration: InputDecoration(labelText: "Nama Sepatu"),
-                validator: (v) => v!.isEmpty ? "Harus diisi" : null,
-              ),
-              TextFormField(
-                controller: _brandController,
-                decoration: InputDecoration(labelText: "Brand"),
-                validator: (v) => v!.isEmpty ? "Harus diisi" : null,
-              ),
-              TextFormField(
-                controller: _ukuranController,
-                decoration: InputDecoration(labelText: "Ukuran"),
-                keyboardType: TextInputType.number,
-                validator: (v) => v!.isEmpty ? "Harus diisi" : null,
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    if (widget.Shoes == null) {
-                      await _service.addShoe(
-                        _namaController.text,
-                        _brandController.text,
-                        int.parse(_ukuranController.text),
-                      );
-                    } else {
-                      await _service.updateShoe(
-                        widget.Shoes!['id'],
-                        _namaController.text,
-                        _brandController.text,
-                        int.parse(_ukuranController.text),
-                      );
-                    }
-                    Navigator.pop(context);
-                  }
-                },
-                child: Text("Simpan"),
-              )
-            ],
-          ),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _namaController,
+              decoration: const InputDecoration(labelText: "Nama Sepatu"),
+            ),
+            const SizedBox(height: 15),
+            TextField(
+              controller: _brandController,
+              decoration: const InputDecoration(labelText: "Brand"),
+            ),
+            const SizedBox(height: 15),
+            TextField(
+              controller: _ukuranController,
+              decoration: const InputDecoration(labelText: "Ukuran"),
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            ),
+            const SizedBox(height: 30),
+            _isLoading
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: _saveData,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                      backgroundColor: Colors.blueAccent,
+                    ),
+                    child: const Text(
+                      "Simpan",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+          ],
         ),
       ),
     );
