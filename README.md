@@ -1,4 +1,3 @@
-## Tampilan Aplikasi
 # ShoesVault - Aplikasi Manajemen Koleksi Sepatu
 
 ## Deskripsi Aplikasi
