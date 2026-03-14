@@ -59,4 +59,4 @@ Koleksi sepatu juga dapat dihapus, pada bagan data ukuran sepatu tidak dapat men
 
 ![alt text](<lib/services/fitur%20pencarian.png>)
 
-Dapat jga melakukan pencarian koleksi agar mudah mencari koleksi.
+Dapat juga melakukan pencarian koleksi agar mudah mencari koleksi.
